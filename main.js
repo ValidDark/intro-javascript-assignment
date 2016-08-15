@@ -1,7 +1,8 @@
 'use strict'
 const lib = require('./lib')
 const employee = lib.employee
-const underlings = lib.underlings
+const higherOrderUnderlings = lib.logUnderlingNames
+const groupByManagerName = lib.groupByManagerName
 
 const brad = employee('brad')
 
@@ -25,6 +26,8 @@ const employees = [
   chris
 ]
 
-console.log(`brad's underlings: ${JSON.stringify(underlings(brad, employees), null, 2)}`)
-console.log(`frank's underlings: ${JSON.stringify(underlings(frank, employees), null, 2)}`)
-console.log(`ed's underlings: ${JSON.stringify(underlings(ed, employees), null, 2)}`)
+// higherOrderUnderlings(brad, employees)
+// higherOrderUnderlings(frank, employees)
+// higherOrderUnderlings(ed, employees)
+
+groupByManagerName(employees)

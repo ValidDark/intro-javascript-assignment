@@ -1,7 +1,10 @@
 function employee (name, manager) {
   return {
-    name: name,
-    manager: manager
+    name,
+    manager,
+    toString: function () {
+      return this.name
+    }
   }
 }
 
@@ -13,11 +16,107 @@ function employee (name, manager) {
  * @param manager the manager to filter by
  * @param employees the employees to choose from
  */
-function underlings (manager, employees) {
-  // TODO
+
+function logUnderlingNames (manager, employees) {
+  employees
+    .filter(function (e) {
+      return e.manager === manager
+    })
+    .map(function (e) {
+      return e.name
+    })
+    .forEach(function (n) {
+      console.log(n)
+    })
 }
+
+function groupByManagerName (employees){
+
+  function getUnderlingNames (manager, employees) {
+    return employees
+      .filter(function (e) {
+        return e.manager === manager
+      })
+  }
+
+const boss = {}
+
+employees
+  .filter(function (e) {
+    return e.manager !== undefined
+  })
+  .map(function (e) {
+    return e.manager
+  })
+  .forEach(function (n) {
+    boss[n.name] = getUnderlingNames (n, employees)
+    //console.log(n.name)
+  })
+
+
+
+
+console.log(boss)
+  //console.log(employees)
+}
+
+//
+//
+// function higherOrderUnderlings(manager,employees){
+//   function hasManager (employee) {
+//     return employee.manager === manager
+//   }
+//   return employees.filter(hasManager)
+// }
+//
+//
+// function higherOrderNames(employees){
+//   function getName(employee){
+//     return employee.name
+//   }
+// return employees.map(getName)
+//   }
+//
+// function higherOrderLog (names) {
+//     function logName (name) {
+//       console.log(name)
+//     }
+//     names.forEach(logName)
+// }
+//
+//
+//  //filtering
+// function underlings (manager, employees) {
+//   const returnArray = []
+//
+//   function hasManager(employee){
+//     return employee.manager===manager
+//   }
+//
+//   for (let i = 0; i < employees.length; ++i) {
+//     if (hasManager(employees[i])) {
+//       returnArray.push(employees[i])
+//     }
+//   }
+//   return returnArray
+// }
+// //mapping / transforming
+// function names(employees){
+//   const result = []
+//   for (let employee of employees){
+//     result.push(employee.name)
+//   }
+//   return result
+// }
+// //foreach
+// function log (names) {
+//   for (let name of names) {
+//     console.log(name)
+//   }
+// }
 
 module.exports = {
   employee,
-  underlings
+  logUnderlingNames,
+  groupByManagerName
 }
