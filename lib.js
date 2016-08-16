@@ -30,34 +30,15 @@ function logUnderlingNames (manager, employees) {
     })
 }
 
-function groupByManagerName (employees){
-
-  function getUnderlingNames (manager, employees) {
-    return employees
-      .filter(function (e) {
-        return e.manager === manager
-      })
-  }
-
-const boss = {}
-
-employees
-  .filter(function (e) {
-    return e.manager !== undefined
-  })
-  .map(function (e) {
-    return e.manager
-  })
-  .forEach(function (n) {
-    boss[n.name] = getUnderlingNames (n, employees)
-    //console.log(n.name)
-  })
 
 
+function groupByManagerName (employees) {
+  const boss = {}
+  employees
+  .filter(e => e.manager !== undefined)
+  .forEach(n => boss[n.manager.name] = employees.filter(e => e.manager === n.manager))
 
-
-console.log(boss)
-  //console.log(employees)
+  console.log(boss)
 }
 
 //
